@@ -1,0 +1,14 @@
+**/__pycache__/
+/.venv/
+/т-банк/
+/join/
+*.pyc
+*.db
+/subqueries/
+/wishlists/
+feeding_station.py
+main.py
+packing_station.py
+sql_connect.py
+sql.py
+wishlist_station.py
