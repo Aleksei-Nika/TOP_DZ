@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Table, Column, Integer, ForeignKey, CheckConstraint, UniqueConstraint
+from sqlalchemy import create_engine, Table, Column, Integer, ForeignKey, CheckConstraint, UniqueConstraint, Enum
 
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
@@ -37,6 +37,7 @@ class Product(Base):
     recipe: Mapped['Recipe'] = relationship(back_populates='product')
     shape_id: Mapped[int] = mapped_column(ForeignKey('shapes.id'))
     shape: Mapped['Shape'] = relationship(back_populates='product')
+    order: Mapped[list['Order_Details']] = relationship(back_populates='products')
     description: Mapped[str]
 
 class Effect(Base):
@@ -87,12 +88,14 @@ class Location(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     ingredients: Mapped[list['Ingredient']] = relationship(back_populates='location')
+    residents: Mapped[list['Client']] = relationship(back_populates='location')
+    description: Mapped[str]
 
 class Shape(Base):
     __tablename__ = 'shapes'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
-    product: Mapped[list['Product']] = relationship(back_populates='shape')
+    products: Mapped[list['Product']] = relationship(back_populates='shape')
 
 class Process(Base):
     __tablename__ = 'processes'
@@ -101,12 +104,49 @@ class Process(Base):
     processes: Mapped[list['Recipe_Step']] = relationship(back_populates='process')
     general_processes: Mapped[list['Recipe']] = relationship(back_populates='general_process')
 
+#Добавить процессы к оборудованию!!!
+
 class Equipment(Base):
     __tablename__ = 'equipments'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     type_material: Mapped[list['Types_Ingredients']] = relationship(back_populates='equipments', secondary=type_material_equipment)
     description: Mapped[str]
+
+
+
+class Client(Base):
+    __tablename__ = 'clients'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    family: Mapped[str]
+    location_id: Mapped[int] = mapped_column(ForeignKey('locations.id'))
+    location: Mapped['Location'] = relationship(back_populates='residents')
+    status: Mapped[str]
+    activity: Mapped[str]
+    orders: Mapped[list['Order']] = relationship(back_populates='client')
+
+class Order(Base):
+    __tablename__ = 'orders'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    client_id: Mapped[int] = mapped_column(ForeignKey('clients.id'))
+    client: Mapped['Client'] = relationship(back_populates='orders')
+    price: Mapped[float]
+    description: Mapped[str]
+    status: Mapped[str] = mapped_column(Enum('исполнен', 'отменен', 'выполняется', name='order_status'))
+    details: Mapped[list['Order_Details']] = relationship(back_populates='order')
+    __table_args__ = (CheckConstraint('price >= 0', name = 'price'),)
+
+
+class Order_Details(Base):
+    __tablename__ = 'orders_details'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    order_id: Mapped[int] = mapped_column(ForeignKey('orders.id'))
+    order: Mapped['Order'] = relationship(back_populates='details')
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'))
+    product: Mapped['Product'] = relationship(back_populates='order')
+    quantity: Mapped[int]
+    __table_args__ = (CheckConstraint('quantity > 0', name = 'quantity'),)
 
 
 Base.metadata.create_all(engine)
