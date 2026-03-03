@@ -103,17 +103,17 @@ class Process(Base):
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     processes: Mapped[list['Recipe_Step']] = relationship(back_populates='process')
     general_processes: Mapped[list['Recipe']] = relationship(back_populates='general_process')
+    equipment_id: Mapped[int] = mapped_column(ForeignKey('equipments.id'))
+    equipment: Mapped['Equipment'] = relationship(back_populates='processes')
 
-#Добавить процессы к оборудованию!!!
 
 class Equipment(Base):
     __tablename__ = 'equipments'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     type_material: Mapped[list['Types_Ingredients']] = relationship(back_populates='equipments', secondary=type_material_equipment)
+    processes: Mapped[list[Process]] = relationship(back_populates='equipment')
     description: Mapped[str]
-
-
 
 class Client(Base):
     __tablename__ = 'clients'
