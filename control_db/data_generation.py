@@ -89,6 +89,9 @@ with Session(engine) as session:
             if key not in self._tags:
                 self._tags[key] = Tag(name = key)
             return self._tags[key]
+        
+        def get(self):
+            return tuple(self._tags.values())
 
     tags = CreateTags()
 
@@ -512,6 +515,12 @@ with Session(engine) as session:
         Effect(name='Молчаливость')
     )
 
+
+
     session.add_all((class_object_location, class_object_ingredient, class_object_product,
-                      *types_object, *objects_location, *additional_names))
+                      *types_object, *objects_location, *additional_names, *tags.get()))
     session.commit()
+
+    x = session.query(Object).filter_by(gender = 'мужской').all()
+    for i in x:
+        print(i)
