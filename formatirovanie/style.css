@@ -1,0 +1,61 @@
+.card {
+    margin: auto;
+    width: 350px;
+    padding: 10px;
+    border: 5px solid rgb(111, 116, 165);
+    border-radius: 15px;
+    background-color: rgb(106, 180, 241);
+}
+
+.card-top {
+    background-image: url(image/paris-haze.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-bottom h2 {
+    text-align: center;
+    color: rgb(45, 88, 180)
+}
+
+.card-bottom p {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 25px;
+    color: rgb(180, 45, 45);
+}
+
+.card-date-price{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card-bottom button {
+    align-items: center;
+    padding: 5px;
+    border-radius: 15px;
+    border: 3px solid rgb(111, 116, 165);
+}
+
+.card-date-price p{
+    color: rgb(45, 88, 180);
+}
+
+.card-bottom button:hover {
+    color: rgb(168, 238, 255);
+    background-color: grey;
+    border: 3px solid rgb(168, 238, 255);
+    transition: 0.5s;
+}
+
+.card:hover {
+    box-shadow: 10px 5px 10px -5px rgb(56, 119, 138);
+    transition: 0.3s;
+}
