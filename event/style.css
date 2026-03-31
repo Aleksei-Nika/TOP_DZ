@@ -1,0 +1,22 @@
+section {
+    background-color: #eee;
+    padding: 20px;
+}
+
+#listBooks {
+    border: 1px solid gray;
+}
+
+#listBooks li {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#listBooks li p{
+    font-family: monospace;
+    margin: 0;
+}
+
+.task1 textarea{
+    font-family: monospace;
+    width: 100%;
+}
