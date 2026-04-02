@@ -7,6 +7,12 @@
     <title>Event</title>
 </head>
 <body>
+    <div id="menu">
+        <p id="menu-add">Добавить элемент</p>
+        <p id="menu-addChild">Добавить дочерний элемент</p>
+        <p id="menu-rename">Переименовать</p>
+        <p id="menu-del">Удалить элемент (и вложения)</p>
+    </div>
     <section class="task1">
         <h2>Задача 1</h2>
         <ol id="listBooks">
@@ -19,6 +25,34 @@
             <li><p>«You Don't Know JS» by Kyle Simpson.</p></li>
         </ol>
         <textarea></textarea>
+        <p></p>
+    </section>
+
+    <section class="task2">
+        <h2>Задача 2</h2>
+        <ul id="tree">
+            <li>This PC
+                <ul>
+                    <li>Local Disc (C:)
+                        <ul>
+                            <li>Program Files</li>
+                            <li>Users</li>
+                            <li>Windiws</li>
+                        </ul>
+                    </li>
+                    <li>Local Disc (D:)
+                        <ul>
+                            <li>New Folder1</li>
+                            <li>New Folder2</li>
+                            <li>New Folder3</li>
+                        </ul>
+                    </li>
+                    <li>Local Disc (E:)</li>
+                </ul>
+            </li>
+        </ul>
+
+
     </section>
     <script src="script.js"></script>
 </body>
