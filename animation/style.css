@@ -109,39 +109,56 @@ a:hover .reference {
 }
 
 .numbers {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     font-weight: bold;
     font-size: 100px;
+    width: 53px;
     color: rgb(0, 255, 110);
+    overflow: hidden;
 }
 
 .digital-hour {
 
 }
 
-.digital-minute {
-
+.digital-minute-ed {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-ed 600s steps(10) infinite;
 }
 
-.digital-second::before {
-    content: attr(data-seconds);
-    animation: ani-digital-clock 10s linear infinite;
+.digital-minute-d {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-d 3600s steps(6) infinite;
+}
+
+.digital-second-ed{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-ed 10s steps(10) infinite;
+}
+
+.digital-second-d{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-d 60s steps(6) infinite;
 }
 
 .digital-split {
 
 }
 
-@keyframes ani-digital-clock {
-    0% {content: "0";}
-    10% {content: "1";}
-    20% {content: "2";}
-    30% {content: "3";}
-    40% {content: "4";}
-    50% {content: "5";}
-    60% {content: "6";}
-    70% {content: "7";}
-    80% {content: "8";}
-    90% {content: "9";}
-    100% {content: "0";}
+@keyframes ani-digital-clock-ed {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-100%); }
+}
+
+@keyframes ani-digital-clock-d {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-100%); }
 }
