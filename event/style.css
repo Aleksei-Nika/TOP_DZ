@@ -54,3 +54,24 @@ section {
     background-color: black;
     border-radius: 2px;
 }
+
+.task4-container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.task4-conteiner-top-button {
+    height: 30px;
+}
+
+.task4-conteiner-top-button span{
+    font-weight: bold;
+}
+
+.task4-container-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
