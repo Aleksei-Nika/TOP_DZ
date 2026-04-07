@@ -45,6 +45,32 @@ a:hover .reference {
     justify-content: center;
 }
 
+#clock {
+    display: none;
+}
+
+#digital-clock {
+    display: none;
+}
+
+#other {
+    display: none;
+}
+
+#clock:target {
+    display: flex;
+}
+
+#digital-clock:target {
+    display: flex;
+}
+
+#other:target {
+    display: flex;
+    position: fixed;
+}
+
+/* Вариант первый. Часы со стрелкой */
 .clock {
     position: relative;
     background-color: white;
@@ -96,6 +122,7 @@ a:hover .reference {
     animation-duration: 1s;
 }
 
+/* Вариант второй. Цифровые часы */
 .digital-clock {
     display: flex;
     justify-content: center;
@@ -109,39 +136,126 @@ a:hover .reference {
 }
 
 .numbers {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     font-weight: bold;
     font-size: 100px;
+    width: 53px;
     color: rgb(0, 255, 110);
+    overflow: hidden;
 }
 
-.digital-hour {
 
+.digital-hour-ed {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-ed 86400ms steps(24) infinite;
 }
 
-.digital-minute {
-
+.digital-hour-d {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-d 86400ms steps(12) infinite;
 }
 
-.digital-second::before {
-    content: attr(data-seconds);
-    animation: ani-digital-clock 10s linear infinite;
+.digital-minute-ed {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-ed 600ms steps(10) infinite;
+}
+
+.digital-minute-d {
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-d 3600ms steps(6) infinite;
+}
+
+.digital-second-ed{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-ed 10ms steps(10) infinite;
+}
+
+.digital-second-d{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    animation: ani-digital-clock-d 60ms steps(6) infinite;
 }
 
 .digital-split {
-
+    animation: ani-digital-clock-split 1200ms steps(1) infinite;
 }
 
-@keyframes ani-digital-clock {
-    0% {content: "0";}
-    10% {content: "1";}
-    20% {content: "2";}
-    30% {content: "3";}
-    40% {content: "4";}
-    50% {content: "5";}
-    60% {content: "6";}
-    70% {content: "7";}
-    80% {content: "8";}
-    90% {content: "9";}
-    100% {content: "0";}
+@keyframes ani-digital-clock-ed {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-100%); }
+}
+
+@keyframes ani-digital-clock-d {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-100%); }
+}
+
+@keyframes ani-digital-clock-split {
+    0% {color:  rgb(0, 255, 110);;}
+    50% {color:  rgb(40, 40, 40); }
+    100% {color: rgb(0, 255, 110);}
+}
+
+/* Другое */
+
+.control {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.animation-start {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: cadetblue;
+}
+
+.animation-start:hover {
+    background-color: rgb(0, 255, 110);
+}
+
+#other:has(#start-jump:hover) #obj1{
+    transform-origin: center bottom;
+    animation: jump 1.0s linear infinite ;
+}
+
+#other:has(#start-jump-circle:hover) #obj1{
+    animation: jump-circle 1.0s linear alternate infinite ;
+}
+
+#obj1 {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0px 0px 50px 1px rgb(1, 216, 94);
+}
+
+@keyframes jump {
+    0% { transform: scale(1) translateY(0);}
+    15% { transform: scale(1.55, 0.45) translateY(0);}
+    30% { transform: scale(0.65, 1.35) translateY(0);}
+    50% { transform: scale(1.35, 0.65) translateY(-200%);}
+    70% { transform: scale(1.0, 1.0) translateY(0);}
+    85% { transform: scale(1.35, 0.65) translateY(0);}
+    100% { transform: scale(1) translateY(0);}
+}
+
+@keyframes jump-circle{
+    0% {}
+    50% {transform: rotate(180deg);}
+    /* 75% {transform: rotate(360deg); border-radius: 50%;} */
+    100% {transform: rotate(360deg); border-radius: 50%;}
 }
