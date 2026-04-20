@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form class="controlPanel" id="form">
+        <div class="controlPanel-conteinerName">
+            <label for="name">Название товара:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="controlPanel-conteinerPrice">
+            <label for="price">Цена:</label>
+            <input type="text" id="price" required>
+        </div>
+        <div class="controlPanel-conteinerDescription">
+            <label for="description">Описание товара:</label>
+            <textarea id="description" required></textarea>
+        </div>
+        <div class="controlPanel-colorPanel">
+            <div id="colorSaved" class="controlPanel-colorPanel-saveConteiner"></div>
+            <input type="color" id="color">
+        </div>
+    </form>
+
+    <div class="show">
+        <div class="show-card">
+            <div class="show-card-img"></div>
+            <div class="show-card-name">Товар 1</div>
+            <div class="show-card-descript">Отписание товара</div>
+            <div class="show-card-descript">1000</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
